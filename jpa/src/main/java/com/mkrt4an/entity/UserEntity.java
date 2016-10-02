@@ -6,30 +6,30 @@ import javax.persistence.*;
  * Created by 123 on 28.09.2016.
  */
 @Entity
-@Table(name = "user", schema = "rzd")
+@Table(name = "user", schema = "transportProject")
 public class UserEntity {
-    private Integer id;
-    private String name;
-
     @Id
     @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @Column(name = "name", nullable = false, length = 20)
+    private String name;
+
+
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "name", nullable = false, length = 20)
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
+
 
     @Override
     public boolean equals(Object o) {

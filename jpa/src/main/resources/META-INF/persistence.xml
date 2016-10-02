@@ -4,11 +4,17 @@
     <persistence-unit name="NewPersistenceUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.mkrt4an.entity.UserEntity</class>
+        <class>com.mkrt4an.entity.CargoEntity</class>
+        <class>com.mkrt4an.entity.CityEntity</class>
+        <class>com.mkrt4an.entity.DriverEntity</class>
+        <class>com.mkrt4an.entity.TruckEntity</class>
+        <class>com.mkrt4an.entity.OrderEntity</class>
+        <class>com.mkrt4an.entity.RoutePointEntity</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/rzd?useTimezone=true&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/transportproject"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password"  value="bassunbassun123"/>
+            <property name="hibernate.connection.password" value="123"/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>

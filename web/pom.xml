@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>hiper-web</artifactId>
     <packaging>war</packaging>
+
     <parent>
         <artifactId>hiber-root</artifactId>
         <groupId>com.hello.test-jpa</groupId>
@@ -17,6 +18,5 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
 
 </project>
