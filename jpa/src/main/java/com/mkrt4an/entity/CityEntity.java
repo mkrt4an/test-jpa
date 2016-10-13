@@ -1,6 +1,7 @@
 package com.mkrt4an.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by 123 on 02.10.2016.
@@ -8,9 +9,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "city", schema = "transportProject")
-public class CityEntity {
+public class CityEntity implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -22,6 +24,18 @@ public class CityEntity {
 
     @Column(name = "y", nullable = false, length = 11)
     private Integer y;
+
+    @OneToOne
+//            (name = "routepoint_id")
+    private RoutePointEntity routepoint;
+
+    public CityEntity(){}
+
+    public CityEntity(String name, Integer x, Integer y) {
+        this.name = name;
+        this.x = x;
+        this.y = y;
+    }
 
 
     public Integer getId() {
@@ -51,7 +65,6 @@ public class CityEntity {
     public void setY(Integer y) {
         this.y = y;
     }
-
 
 
     @Override
@@ -84,6 +97,6 @@ public class CityEntity {
                 ", name='" + name + '\'' +
                 ", x=" + x +
                 ", y=" + y +
-                '}';
+                '}' + "\n";
     }
 }

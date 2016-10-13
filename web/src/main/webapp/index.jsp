@@ -1,9 +1,9 @@
 <!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 
 <%@ page contentType="text/html; charset=windows-1251" %>
-<%@ page import="com.mkrt4an.dao.DaoServ, com.mkrt4an.entity.UserEntity" %>
+<%@ page import="com.mkrt4an.utils.EntityManagerFactory, com.mkrt4an.entity.UserEntity" %>
 <%@ page import="javax.persistence.EntityManager" %>
-<%--<%@ page import="static com.mkrt4an.dao.DaoServ.doGet" %>--%>
+<%--<%@ page import="static com.mkrt4an.utils.EntityManagerFactoryanagerFactory.doGet" %>--%>
 <%@ page import="javax.persistence.EntityManagerFactory" %>
 <%@ page import="javax.persistence.Persistence" %>
 <%@ page import="javax.persistence.TypedQuery" %>
@@ -13,13 +13,14 @@
 <html>
     <body>
         <h2>
-            Добро пожаловать! Сегодня <%= new DaoServ().doGetMore() %>
+            <%--Добро пожаловать! Сегодня <%= new EntityManagerFactory().doGetMore() %>--%>
+            Добро пожаловать!
         </h2>
     </body>
 </html>
 
 <%--<%!--%>
-    <%--List<UserEntity> getFormattedDate () <%= new DaoServ().doGetMore() %>{--%>
+    <%--List<UserEntity> getFormattedDate () <%= new EntityManagerFactory().doGetMore() %>{--%>
         <%--EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");--%>
         <%--EntityManager em = emf.createEntityManager();--%>
         <%--TypedQuery<UserEntity> typedQuery;--%>

@@ -1,18 +1,21 @@
 package com.mkrt4an.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by 123 on 28.09.2016.
  */
 @Entity
 @Table(name = "user", schema = "transportProject")
-public class UserEntity {
+public class UserEntity implements Serializable {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false, length = 20)
+    @Column(name = "name", nullable = true, length = 20)
     private String name;
 
 
@@ -27,6 +30,19 @@ public class UserEntity {
         return name;
     }
     public void setName(String name) {
+        this.name = name;
+    }
+
+
+    //Constructors
+    public UserEntity(){}
+
+    public UserEntity(Integer id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    public UserEntity(String name){
         this.name = name;
     }
 

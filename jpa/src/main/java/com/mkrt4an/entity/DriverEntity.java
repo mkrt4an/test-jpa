@@ -1,40 +1,63 @@
 package com.mkrt4an.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by 123 on 02.10.2016.
  */
+
 @Entity
 @Table(name = "driver", schema = "transportproject")
-public class DriverEntity {
+public class DriverEntity implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "firstName", nullable = true, length = 45)
+    @Column(name = "firstName", nullable = false, length = 45)
     private String firstName;
 
     @Column(name = "lastName", nullable = true, length = 45)
     private String lastName;
 
-    @Column(name = "workedHours", nullable = true)
+    @Column(name = "workedHours", nullable = false)
     private Integer workedHours;
 
-    @Column(name = "status", nullable = true)
+    @Column(name = "status", nullable = false)
     private Integer status;
 
     @OneToOne   //  (cascade = CascadeType.DETACH)
     @JoinColumn(name= "truck_id")
     private TruckEntity currentTruck;
 
-    @OneToOne   //  (cascade = CascadeType.DETACH)
+    @ManyToOne   //  (cascade = CascadeType.DETACH)
     @JoinColumn(name= "city_id")
     private CityEntity currentCity;
 
     @ManyToOne
-    private DriverEntity driver;
+    @JoinColumn(name= "orders_id")
+    private OrderEntity order;
+
+
+    public DriverEntity(String firstName, String lastName, Integer workedHours, Integer status) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.workedHours = workedHours;
+        this.status = status;
+//        this.currentTruck = currentTruck;
+//        this.currentCity = currentCity;
+//        this.order = order;
+    }
+
+    public DriverEntity(String firstName) {
+
+        this.firstName = firstName;
+    }
+
+    public DriverEntity(){}
+
 
 
     public Integer getId() {
@@ -115,5 +138,19 @@ public class DriverEntity {
         result = 31 * result + (currentTruck != null ? currentTruck.hashCode() : 0);
         result = 31 * result + (currentCity != null ? currentCity.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "DriverEntity{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", workedHours=" + workedHours +
+                ", status=" + status +
+                ", currentTruck=" + currentTruck.getRegNumber() +
+                ", currentCity=" + currentCity.getName() +
+//                ", driver=" + driver +
+                '}' + "\n";
     }
 }

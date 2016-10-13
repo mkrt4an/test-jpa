@@ -1,15 +1,22 @@
 package com.mkrt4an.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 123 on 02.10.2016.
  */
+
 @Entity
-@Table(name = "order", schema = "transportproject")
-public class OrderEntity {
+@Table(name = "orders", schema = "transportproject")
+public class OrderEntity implements Serializable {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -19,16 +26,28 @@ public class OrderEntity {
     @Column(name = "status", nullable = true)
     private Integer status;
 
-    @OneToMany (mappedBy = "routePoint")
+    @OneToMany (mappedBy = "order")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<RoutePointEntity> routePointList;
 
-    @OneToMany (mappedBy = "driver")
+    @OneToMany (mappedBy = "order")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<DriverEntity> driverList;
 
-    @OneToOne   //  (cascade = CascadeType.DETACH)
-    @JoinColumn(name = "truck_id")
+    @OneToOne
+   (mappedBy = "orders")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private TruckEntity currentTruck;
 
+    public OrderEntity(){}
+
+    public OrderEntity(Integer uid, Integer status, List<RoutePointEntity> routePointList, List<DriverEntity> driverList, TruckEntity currentTruck) {
+        this.uid = uid;
+        this.status = status;
+        this.routePointList = routePointList;
+        this.driverList = driverList;
+        this.currentTruck = currentTruck;
+    }
 
     public Integer getId() {
         return id;
@@ -58,6 +77,12 @@ public class OrderEntity {
         return currentTruck;
     }
 
+    public List<RoutePointEntity> getRoutePointList() {
+        return routePointList;
+    }
+    public void setRoutePointList(List<RoutePointEntity> routePointList) {
+        this.routePointList = routePointList;
+    }
 
 
     @Override
@@ -80,5 +105,17 @@ public class OrderEntity {
         result = 31 * result + (uid != null ? uid.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", status=" + status +
+                ", routePointList=" + routePointList +
+                ", driverList=" + driverList +
+                ", currentTruck=" + currentTruck.getRegNumber() +
+                '}' + "\n";
     }
 }

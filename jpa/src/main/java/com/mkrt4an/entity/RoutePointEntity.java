@@ -1,47 +1,75 @@
 package com.mkrt4an.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * Created by 123 on 02.10.2016.
  */
+
 @Entity
 @Table(name = "routepoint", schema = "transportproject")
-public class RoutePointEntity {
+public class RoutePointEntity implements Serializable {
 
     @Id
-    @Column(name = "order", nullable = false)
-    private Integer order;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-    @Column(name = "type", nullable = true, length = 45)
-    private String type;
+    @Column(name = "type", nullable = false)
+    private Integer type;
 
-    @OneToOne
-    @JoinColumn(name= "city_id")
+    @OneToOne (mappedBy = "routepoint")
     private CityEntity city;
 
-    @OneToMany (mappedBy = "cargo")
-    private List<CargoEntity> cargo;
+    @OneToOne (mappedBy = "routePoint")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private CargoEntity cargo;
 
     @ManyToOne
-    private RoutePointEntity routePoint;
+    @JoinColumn(name = "orders_id")
+    private OrderEntity order;
 
 
-    public Integer getOrder() {
-        return order;
-    }
-    public void setOrder(Integer order) {
+    public RoutePointEntity(){}
+
+    public RoutePointEntity(Integer type, CityEntity city, CargoEntity cargo, OrderEntity order) {
+        this.type = type;
+        this.city = city;
+        this.cargo = cargo;
         this.order = order;
     }
 
-    public String getType() {
+    public Integer getOrder() {
+        return id;
+    }
+    public void setOrder(Integer order) {
+        this.id = order;
+    }
+
+    public Integer getType() {
         return type;
     }
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
+    public CityEntity getCity() {
+        return city;
+    }
+    public void setCity(CityEntity city) {
+        this.city = city;
+    }
+
+    public CargoEntity getCargo() {
+        return cargo;
+    }
+    public void setCargo(CargoEntity cargo) {
+        this.cargo = cargo;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -50,7 +78,7 @@ public class RoutePointEntity {
 
         RoutePointEntity that = (RoutePointEntity) o;
 
-        if (order != null ? !order.equals(that.order) : that.order != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
@@ -58,8 +86,18 @@ public class RoutePointEntity {
 
     @Override
     public int hashCode() {
-        int result = order != null ? order.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "RoutePointEntity{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", city=" + city +
+                ", cargo=" + cargo +
+                '}' + "\n";
     }
 }

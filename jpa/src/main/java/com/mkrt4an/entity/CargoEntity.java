@@ -1,29 +1,49 @@
 package com.mkrt4an.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by 123 on 02.10.2016.
  */
 @Entity
 @Table(name = "cargo", schema = "transportProject")
-public class CargoEntity {
+public class CargoEntity implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = true, length = 45)
+    @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @Column(name = "weight", nullable = true)
+    @Column(name = "weight", nullable = false)
     private Integer weight;
 
-    @Column(name = "status", nullable = true)
+    @Column(name = "status", nullable = false)
     private Integer status;
 
-    @ManyToOne
-    private CargoEntity cargo;
+    @OneToOne
+    private RoutePointEntity routePoint;
+
+    public CargoEntity(){
+    }
+
+    public CargoEntity(String name, Integer weight, Integer status){
+        this.name = name;
+        this.weight = weight;
+        this.status = status;
+//        this.routePoint = routePoint;
+    }
+
+    public CargoEntity(Integer id, String name, Integer weight, Integer status){
+        this.id = id;
+        this.name = name;
+        this.weight = weight;
+        this.status = status;
+//        this.routePoint = routePoint;
+    }
 
 
     public Integer getId() {
@@ -53,6 +73,19 @@ public class CargoEntity {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    public void setRoutinPoint(RoutePointEntity routinPoint) {
+        this.routePoint = routinPoint;
+    }
+    public RoutePointEntity getRoutinPoint() {
+
+        return routePoint;
+    }
+
+    //Constructors
+//    CargoEntity(){
+//
+//    }
 
 
     @Override
@@ -85,6 +118,6 @@ public class CargoEntity {
                 ", name='" + name + '\'' +
                 ", weight=" + weight +
                 ", status=" + status +
-                '}';
+                '}' + "\n";
     }
 }
