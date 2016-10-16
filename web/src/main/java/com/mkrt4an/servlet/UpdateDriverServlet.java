@@ -1,5 +1,6 @@
 package com.mkrt4an.servlet;
 
+import com.mkrt4an.dao.CityDao;
 import com.mkrt4an.dao.DriverDao;
 import com.mkrt4an.entity.DriverEntity;
 
@@ -8,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import static com.mkrt4an.utils.EManagerFactory.getEntityManager;
+import static com.mkrt4an.utils.EntityManagerHelper.getEntityManager;
 
 /**
  * Created by 123 on 12.10.2016.
@@ -21,51 +21,46 @@ public class UpdateDriverServlet extends HttpServlet {
 
         response.setContentType("text/html");
 
-        PrintWriter out = response.getWriter();
-
         DriverDao drd = new DriverDao(getEntityManager());
+        CityDao ctd = new CityDao(getEntityManager());
 
         Integer id = 0;
 
-
         DriverEntity dre;
 
+        String url = request.getServletPath();
 
+        if ("/UpdateDriverServlet".equals(url)) {
+            id = Integer.parseInt(request.getParameter("id"));
+            dre = drd.findDriverById(id);
 
-        if (request.getParameter("update") != null){
+            request.setAttribute("driver", dre);
+            request.setAttribute("cityAll", ctd.getAllCities());
+            request.getRequestDispatcher("/UpdateDriver.jsp").forward(request, response);
 
+        } else if ("/AddDriver".equals(url)) {
+            request.setAttribute("cityAll", ctd.getAllCities());
+            request.getRequestDispatcher("/AddDriver.jsp").forward(request, response);
+
+        } else if ("/UpdateDriverServletConfirmed".equals(url)) {
+            id = Integer.parseInt(request.getParameter("id"));
             dre = drd.findDriverById(id);
 
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             Integer workedHours = Integer.parseInt(request.getParameter("workedHours"));
             Integer status = Integer.parseInt(request.getParameter("status"));
+            Integer cityId =  Integer.parseInt(request.getParameter("city"));
 
             dre.setFirstName(firstName);
             dre.setLastName(lastName);
             dre.setWorkedHours(workedHours);
             dre.setStatus(status);
+            dre.setCurrentCity(ctd.findCityById(cityId));
 
             drd.updateDriver(dre);
 
             request.getRequestDispatcher("/GetAllDriversServlet").forward(request, response);
-
-//            out.println(request.getParameter("update"));
-//            out.println(request.getParameter("firstName"));
-//            out.println(request.getParameter("lastName"));
         }
-
-        id = Integer.parseInt(request.getParameter("id"));
-        dre = drd.findDriverById(id);
-
-
-        request.setAttribute("id", dre.getId());
-        request.setAttribute("firstName", dre.getFirstName());
-        request.setAttribute("lastName", dre.getLastName());
-        request.setAttribute("workedHours", dre.getWorkedHours());
-        request.setAttribute("status", dre.getStatus());
-
-        request.getRequestDispatcher("/UpdateDriver.jsp").forward(request, response);
-
     }
 }

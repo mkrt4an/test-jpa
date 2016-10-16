@@ -15,8 +15,12 @@ public class UserEntity implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = true, length = 20)
+    @Column(name = "name", nullable = false, length = 20)
     private String name;
+
+    @OneToOne
+    @JoinColumn(name = "passport_id")
+    private PassportEntity passport;
 
 
     public Integer getId() {
@@ -31,6 +35,13 @@ public class UserEntity implements Serializable {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public PassportEntity getPassport() {
+        return passport;
+    }
+    public void setPassport(PassportEntity passport) {
+        this.passport = passport;
     }
 
 
@@ -71,7 +82,8 @@ public class UserEntity implements Serializable {
     public String toString() {
         return "UserEntity{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+                ", name=" + name +
+                ", passport=" + (passport == null ? "NULL" : passport.getId()) +
+                '}' + '\n';
     }
 }

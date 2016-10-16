@@ -20,20 +20,20 @@ public class UserDao {
 
 
     // Find by id
-    public UserEntity findUserById(int id) {
+    public UserEntity findById(int id) {
         UserEntity cg = em.find(UserEntity.class, id);
         return cg;
     }
 
     //Get all cargo list
-    public List<UserEntity> getAllUsers () {
+    public List<UserEntity> getAll () {
         List<UserEntity> cgl;
         cgl = em.createQuery("select c from UserEntity c", UserEntity.class).getResultList();
         return cgl;
     }
 
     //Create
-    public void createUser(UserEntity cg){
+    public void create(UserEntity cg){
         em.getTransaction().begin();
         em.persist(cg);
         em.getTransaction().commit();
@@ -42,7 +42,7 @@ public class UserDao {
     }
 
     //Update
-    public void updateUser(UserEntity cg){
+    public void update(UserEntity cg){
         em.getTransaction().begin();
         em.persist(cg);
         em.getTransaction().commit();
@@ -50,7 +50,7 @@ public class UserDao {
     }
 
     //Delete
-    public void deleteUser (UserEntity cg){
+    public void delete (UserEntity cg){
         em.getTransaction().begin();
         em.remove(cg);
         em.getTransaction().commit();

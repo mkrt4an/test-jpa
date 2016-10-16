@@ -41,13 +41,13 @@ public class DriverEntity implements Serializable {
     private OrderEntity order;
 
 
-    public DriverEntity(String firstName, String lastName, Integer workedHours, Integer status) {
+    public DriverEntity(String firstName, String lastName, Integer workedHours, Integer status, CityEntity currentCity) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.workedHours = workedHours;
         this.status = status;
 //        this.currentTruck = currentTruck;
-//        this.currentCity = currentCity;
+        this.currentCity = currentCity;
 //        this.order = order;
     }
 
@@ -98,6 +98,9 @@ public class DriverEntity implements Serializable {
     public TruckEntity getCurrentTruck() {
         return currentTruck;
     }
+//    public String getCurrentTruck() {
+//        return currentTruck.getRegNumber();
+//    }
     public void setCurrentTruck(TruckEntity currentTruck) {
         this.currentTruck = currentTruck;
     }
@@ -105,6 +108,10 @@ public class DriverEntity implements Serializable {
     public CityEntity getCurrentCity() {
         return currentCity;
     }
+
+//    public String getCurrentCity() {
+//        return currentCity.getName();
+//    }
     public void setCurrentCity(CityEntity currentCity) {
         this.currentCity = currentCity;
     }
@@ -144,8 +151,8 @@ public class DriverEntity implements Serializable {
     public String toString() {
         return "DriverEntity{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", firstName=" + firstName + '\'' +
+                ", lastName=" + lastName + '\'' +
                 ", workedHours=" + workedHours +
                 ", status=" + status +
                 ", currentTruck=" + currentTruck.getRegNumber() +

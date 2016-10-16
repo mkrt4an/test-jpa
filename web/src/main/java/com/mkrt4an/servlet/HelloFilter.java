@@ -34,7 +34,7 @@ import java.io.PrintWriter;
 
             else{
                 out.print("username or password error!");
-                RequestDispatcher rd = req.getRequestDispatcher("index.html");
+                RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
                 rd.include(req, res);
             }
         }

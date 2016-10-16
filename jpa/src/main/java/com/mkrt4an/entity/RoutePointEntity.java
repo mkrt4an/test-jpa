@@ -95,7 +95,7 @@ public class RoutePointEntity implements Serializable {
     public String toString() {
         return "RoutePointEntity{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
+                ", type=" + type + '\'' +
                 ", city=" + city +
                 ", cargo=" + cargo +
                 '}' + "\n";

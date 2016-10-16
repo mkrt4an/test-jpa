@@ -1,25 +1,35 @@
-<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<%@include file="header.jsp" %>
 
-<html>
-    <head>
-        <title>Add New Driver</title>
-        <link rel="stylesheet" href="styles.css" />
-    </head>
+<form action="/AddNewDriverServlet" method="get">
+    <input type="hidden" name="id" value="${driver.id}" />
 
-    <body>
-        <form action="/AddNewDriverServlet" method="get">
-            <p>First name
-                <input type="text" name="firstName" /></p>
-            <p>Last name
-                <input type="text" name="lastName" /></p>
-            <p>worked hours
-                <input type="text" name="workedHours" /></p>
-            <p>status
-                <input type="text" name="status" /></p>
-            <p>Submit button.
-                <input type="submit" name="addDriver" value="submit" /></p>
-            <p>Cancel button.
-                <input type="button" name="Cancel" value="submit" /></p>
-        </form>
-    </body>
-</html>
+    First name:<br>
+    <input type="text" name="firstName" value="${driver.firstName}"/><br>
+
+    Last name:<br>
+    <input type="text" name="lastName" value="${driver.lastName}"/><br>
+
+    worked hours:<br>
+    <input type="text" name="workedHours" value="${driver.workedHours}"/><br>
+
+    status:<br>
+    <input type="text" name="status" value="${driver.status}"/><br>
+
+    currentCity:<br>
+    <select name="city">
+        <c:forEach var="item" items="${cityAll}">
+            <option value="${item.id}"
+                    <%--<c:if test="${item.name==driver.currentCity.name}">--%>
+                        <%--<c:out value="selected"/>--%>
+                    <%--</c:if>--%>
+                    >
+                <c:out value="${item.name}"/>
+            </option>
+        </c:forEach>
+    </select><br><br>
+
+    <input type="submit" name="update" value="submit"/>
+    <input type="button" name="Cancel" value="Back" onclick="location.href='/GetAllDriversServlet'"/>
+</form>
+
+<%@include file="footer.jsp" %>

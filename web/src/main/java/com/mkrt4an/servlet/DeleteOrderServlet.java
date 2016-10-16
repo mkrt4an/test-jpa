@@ -1,7 +1,7 @@
 package com.mkrt4an.servlet;
 
-import com.mkrt4an.dao.DriverDao;
-import com.mkrt4an.entity.DriverEntity;
+import com.mkrt4an.dao.OrderDao;
+import com.mkrt4an.entity.OrderEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,24 +15,24 @@ import static com.mkrt4an.utils.EntityManagerHelper.getEntityManager;
 /**
  * Created by 123 on 12.10.2016.
  */
-public class DeleteDriverServlet extends HttpServlet {
+public class DeleteOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setContentType("text/html");
 
-        DriverDao drd = new DriverDao(getEntityManager());
+        OrderDao ord = new OrderDao(getEntityManager());
 
         Integer id = Integer.parseInt(request.getParameter("id"));
 
-        drd.deleteDriver(drd.findDriverById(id));
+        ord.deleteOrder(ord.findOrderById(id));
 
-        List<DriverEntity> drl = drd.getAllDrivers();
+        List<OrderEntity> orl = ord.getAllOrders();
 
-        request.setAttribute("list", drl);
+        request.setAttribute("list", orl);
 
-        request.getRequestDispatcher("/GetAllDrivers.jsp").forward(request, response);
+        request.getRequestDispatcher("/GetAllOrders.jsp").forward(request, response);
     }
 }
 

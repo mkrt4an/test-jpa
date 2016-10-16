@@ -115,7 +115,7 @@ public class CargoEntity implements Serializable {
     public String toString() {
         return "CargoEntity{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name=" + name + '\'' +
                 ", weight=" + weight +
                 ", status=" + status +
                 '}' + "\n";

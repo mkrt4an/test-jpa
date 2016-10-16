@@ -2,8 +2,8 @@ package com.mkrt4an.servlet; /**
  * Created by 123 on 04.10.2016.
  */
 
-import com.mkrt4an.dao.DriverDao;
-import com.mkrt4an.entity.DriverEntity;
+import com.mkrt4an.dao.CargoDao;
+import com.mkrt4an.entity.CargoEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ import java.util.List;
 
 import static com.mkrt4an.utils.EntityManagerHelper.getEntityManager;
 
-public class GetAllDriversServlet extends HttpServlet {
+public class GetAllCargoServlet extends HttpServlet {
 
     static final Logger logger = LogManager.getLogger(GetAllDriversServlet.class.getName());
 
@@ -25,12 +25,12 @@ public class GetAllDriversServlet extends HttpServlet {
 
         response.setContentType("text/html");
 
-        DriverDao drd = new DriverDao(getEntityManager());
+        CargoDao cgd = new CargoDao(getEntityManager());
 
-        List<DriverEntity> drl = drd.getAllDrivers();
+        List<CargoEntity> cgl = cgd.getAllCargo();
 
-        request.setAttribute("list", drl);
+        request.setAttribute("list", cgl);
 
-        request.getRequestDispatcher("/GetAllDrivers.jsp").forward(request, response);
+        request.getRequestDispatcher("/GetAllCargo.jsp").forward(request, response);
     }
 }

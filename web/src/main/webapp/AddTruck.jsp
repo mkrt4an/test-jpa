@@ -1,38 +1,35 @@
-<%--<!--<%&#45;&#45;-->--%>
-  <%--<!--Created by IntelliJ IDEA.-->--%>
-  <%--<!--User: 123-->--%>
-  <%--<!--Date: 10.10.2016-->--%>
-  <%--<!--Time: 22:25-->--%>
-  <%--<!--To change this template use File | Settings | File Templates.-->--%>
-<%--<!--&#45;&#45;%>-->--%>
+<%@include file="header.jsp" %>
 
-<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
-
-<html>
-<head>
-    <title>Add New Truck</title>
-    <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
 <form action="/AddNewTruckServlet" method="get">
+  <input type="hidden" name="id" value="${truck.id}" />
 
-  <p>Duty Size
-    <input type="text" name="dutySize" /></p>
+  dutySize:<br>
+  <input type="text" name="dutySize" value="${truck.dutySize}"/><br>
 
-  <p>Capasity
-    <input type="text" name="capasity" /></p>
+  capasity:<br>
+  <input type="text" name="capasity" value="${truck.capasity}"/><br>
 
-  <p>status
-    <input type="text" name="status" /></p>
+  regNumber:<br>
+  <input type="text" name="regNumber" value="${truck.regNumber}"/><br>
 
-  <p>Reg Number
-    <input type="text" name="regNumber" /></p>
+  status:<br>
+  <input type="text" name="status" value="${truck.status}"/><br>
 
-  <p>Submit button.
-    <input type="submit" name="addTruck" value="submit" /></p>
+  currentCity:<br>
+  <select name="city">
+    <c:forEach var="item" items="${cityAll}">
+      <option value="${item.id}"
+              <%--<c:if test="${item.name==truck.currentCity.name}">--%>
+                <%--<c:out value="selected"/>--%>
+              <%--</c:if>--%>
+              >
+        <c:out value="${item.name}"/>
+      </option>
+    </c:forEach>
+  </select><br><br>
 
-  <p>Cancel button.
-    <input type="button" name="Cancel" value="submit" /></p>
+  <input type="submit" name="update" value="submit"/>
+  <input type="button" name="Cancel" value="Back" onclick="location.href='/GetAllTrucksServlet'"/>
 </form>
-</body>
-</html>
+
+<%@include file="footer.jsp" %>

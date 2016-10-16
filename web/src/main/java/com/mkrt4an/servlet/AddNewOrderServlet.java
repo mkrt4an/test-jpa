@@ -4,8 +4,9 @@ package com.mkrt4an.servlet;
  * Created by 123 on 04.10.2016.
  */
 
+import com.mkrt4an.dao.OrderDao;
 import com.mkrt4an.dao.TruckDao;
-import com.mkrt4an.entity.TruckEntity;
+import com.mkrt4an.entity.OrderEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,29 +17,29 @@ import java.util.List;
 
 import static com.mkrt4an.utils.EntityManagerHelper.getEntityManager;
 
-public class AddNewTruckServlet extends HttpServlet {
+public class AddNewOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setContentType("text/html");
 
-        Integer dutySize = Integer.parseInt(request.getParameter("dutySize"));
-        Integer capasity = Integer.parseInt(request.getParameter("capasity"));
-        String regNumber = request.getParameter("regNumber");
+        Integer uid = Integer.parseInt(request.getParameter("uid"));
         Integer status = Integer.parseInt(request.getParameter("status"));
+        Integer currentTruckId = Integer.parseInt(request.getParameter("currentTruck"));
+//        Integer status = Integer.parseInt(request.getParameter("status"));
 
+        OrderDao ord = new OrderDao(getEntityManager());
         TruckDao tkd = new TruckDao(getEntityManager());
 
-        TruckEntity tke;
-        tke = new TruckEntity(dutySize, capasity, status, regNumber);
+        OrderEntity ore = new OrderEntity(uid, status, tkd.findTruckById(currentTruckId));
 
-        tkd.createTruck(tke);
+        ord.createOrder(ore);
 
-        List<TruckEntity> tkl = tkd.getAllTrucks();
+        List<OrderEntity> orl = ord.getAllOrders();
 
-        request.setAttribute("list", tkl);
+        request.setAttribute("list", orl);
 
-        request.getRequestDispatcher("/GetAllTrucks.jsp").forward(request, response);
+        request.getRequestDispatcher("/GetAllOrders.jsp").forward(request, response);
     }
 }

@@ -20,7 +20,7 @@ public class OrderEntity implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "UID", nullable = true)
+    @Column(name = "uid", nullable = true)
     private Integer uid;
 
     @Column(name = "status", nullable = true)
@@ -34,18 +34,30 @@ public class OrderEntity implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<DriverEntity> driverList;
 
-    @OneToOne
-   (mappedBy = "orders")
+    @OneToOne (mappedBy = "orders")
     @LazyCollection(LazyCollectionOption.FALSE)
     private TruckEntity currentTruck;
 
     public OrderEntity(){}
 
-    public OrderEntity(Integer uid, Integer status, List<RoutePointEntity> routePointList, List<DriverEntity> driverList, TruckEntity currentTruck) {
+    public OrderEntity(Integer uid, Integer status, List<RoutePointEntity> routePointList,
+                                List<DriverEntity> driverList, TruckEntity currentTruck) {
         this.uid = uid;
         this.status = status;
         this.routePointList = routePointList;
         this.driverList = driverList;
+        this.currentTruck = currentTruck;
+    }
+
+    public OrderEntity(Integer uid, Integer status, TruckEntity currentTruck) {
+        this.uid = uid;
+        this.status = status;
+        this.currentTruck = currentTruck;
+    }
+
+    public OrderEntity(Integer uid, Integer status, TruckEntity currentTruck, List<DriverEntity> driverList) {
+        this.uid = uid;
+        this.status = status;
         this.currentTruck = currentTruck;
     }
 
@@ -84,6 +96,14 @@ public class OrderEntity implements Serializable {
         this.routePointList = routePointList;
     }
 
+    public List<DriverEntity> getDriverList() {
+        return driverList;
+    }
+    public void setDriverList(List<DriverEntity> driverList) {
+        this.driverList = driverList;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -113,9 +133,10 @@ public class OrderEntity implements Serializable {
                 "id=" + id +
                 ", uid=" + uid +
                 ", status=" + status +
-                ", routePointList=" + routePointList +
+//                ", routePointList=" + routePointList +
                 ", driverList=" + driverList +
-                ", currentTruck=" + currentTruck.getRegNumber() +
+//                ", currentTruck=" + currentTruck.getRegNumber() +
+                ", currentTruck=" + (currentTruck == null ? "NULL" : currentTruck.getId()) +
                 '}' + "\n";
     }
 }

@@ -36,6 +36,8 @@
         <servlet-name>TestServlet</servlet-name>
         <servlet-class>com.mkrt4an.servlet.TestServlet</servlet-class>
     </servlet>
+
+    <!--AddServlets-->
     <servlet>
         <servlet-name>AddNewDriverServlet</servlet-name>
         <servlet-class>com.mkrt4an.servlet.AddNewDriverServlet</servlet-class>
@@ -45,6 +47,16 @@
         <servlet-class>com.mkrt4an.servlet.AddNewTruckServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AddNewCargoServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.AddNewCargoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewOrderServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.AddNewOrderServlet</servlet-class>
+    </servlet>
+
+    <!--GetAllServlets-->
+    <servlet>
         <servlet-name>GetAllDriversServlet</servlet-name>
         <servlet-class>com.mkrt4an.servlet.GetAllDriversServlet</servlet-class>
     </servlet>
@@ -53,17 +65,56 @@
         <servlet-class>com.mkrt4an.servlet.GetAllTrucksServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GetAllCargoServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.GetAllCargoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllOrdersServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.GetAllOrdersServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>JspTestServlet</servlet-name>
         <servlet-class>com.mkrt4an.servlet.JspTestServlet</servlet-class>
     </servlet>
+
+    <!--DeleteServlets-->
     <servlet>
         <servlet-name>DeleteDriverServlet</servlet-name>
         <servlet-class>com.mkrt4an.servlet.DeleteDriverServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>DeleteTruckServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.DeleteTruckServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCargoServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.DeleteCargoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteOrderServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.DeleteOrderServlet</servlet-class>
+    </servlet>
+
+    <!--UpdateServlets-->
+    <servlet>
         <servlet-name>UpdateDriverServlet</servlet-name>
         <servlet-class>com.mkrt4an.servlet.UpdateDriverServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateTruckServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.UpdateTruckServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCargoServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.UpdateCargoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateOrderServlet</servlet-name>
+        <servlet-class>com.mkrt4an.servlet.UpdateOrderServlet</servlet-class>
+    </servlet>
+
+
 
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
@@ -77,10 +128,13 @@
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/ProfileServlet</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>TestServlet</servlet-name>
         <url-pattern>/TestServlet</url-pattern>
     </servlet-mapping>
+
+    <!--AddNewServletMapping-->
     <servlet-mapping>
         <servlet-name>AddNewDriverServlet</servlet-name>
         <url-pattern>/AddNewDriverServlet</url-pattern>
@@ -90,6 +144,16 @@
         <url-pattern>/AddNewTruckServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AddNewCargoServlet</servlet-name>
+        <url-pattern>/AddNewCargoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewOrderServlet</servlet-name>
+        <url-pattern>/AddNewOrderServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--GetAllServletMapping-->
+    <servlet-mapping>
         <servlet-name>GetAllDriversServlet</servlet-name>
         <url-pattern>/GetAllDriversServlet</url-pattern>
     </servlet-mapping>
@@ -98,15 +162,61 @@
         <url-pattern>/GetAllTrucksServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>GetAllCargoServlet</servlet-name>
+        <url-pattern>/GetAllCargoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllOrdersServlet</servlet-name>
+        <url-pattern>/GetAllOrdersServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>JspTestServlet</servlet-name>
         <url-pattern>/JspTestServlet</url-pattern>
     </servlet-mapping>
+
+<!--DeleteServletMapping-->
     <servlet-mapping>
         <servlet-name>DeleteDriverServlet</servlet-name>
         <url-pattern>/DeleteDriverServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>DeleteTruckServlet</servlet-name>
+        <url-pattern>/DeleteTruckServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCargoServlet</servlet-name>
+        <url-pattern>/DeleteCargoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteOrderServlet</servlet-name>
+        <url-pattern>/DeleteOrderServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--UpdateServletMapping-->
+    <servlet-mapping>
         <servlet-name>UpdateDriverServlet</servlet-name>
         <url-pattern>/UpdateDriverServlet</url-pattern>
+        <url-pattern>/UpdateDriverServletConfirmed</url-pattern>
+        <url-pattern>/AddDriver</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateTruckServlet</servlet-name>
+        <url-pattern>/UpdateTruckServlet</url-pattern>
+        <url-pattern>/UpdateTruckServletConfirmed</url-pattern>
+        <url-pattern>/AddTruck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCargoServlet</servlet-name>
+        <url-pattern>/UpdateCargoServlet</url-pattern>
+        <url-pattern>/UpdateCargoServletConfirmed</url-pattern>
+        <url-pattern>/AddCargo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateOrderServlet</servlet-name>
+        <url-pattern>/UpdateOrderServlet</url-pattern>
+        <url-pattern>/UpdateOrderServletConfirmed</url-pattern>
+        <url-pattern>/AddOrder</url-pattern>
+    </servlet-mapping>
+
 </web-app>
